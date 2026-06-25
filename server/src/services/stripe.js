@@ -56,7 +56,11 @@ export async function createTierCheckoutSession({
     tier: String(tier),
     type: 'fluxgrid_tier',
   };
-  if (endorselyReferral) metadata.endorsely_referral = String(endorselyReferral).slice(0, 200);
+
+  // Endorsely affiliate tracking — value from window.endorsely_referral on the client
+  if (endorselyReferral) {
+    metadata.endorsely_referral = String(endorselyReferral).slice(0, 200);
+  }
   if (affiliateRef) metadata.affiliate_ref = String(affiliateRef).slice(0, 100);
 
   const sessionParams = {
@@ -81,7 +85,16 @@ export async function createTierCheckoutSession({
   };
 
   const ref = endorselyReferral ? String(endorselyReferral).slice(0, 200) : '';
-  if (ref) sessionParams.client_reference_id = ref;
+  if (ref) {
+    sessionParams.client_reference_id = ref;
+    sessionParams.payment_intent_data = {
+      metadata: {
+        endorsely_referral: ref,
+        subscriptionId: String(subscriptionId),
+        tier: String(tier),
+      },
+    };
+  }
 
   const session = await stripe.checkout.sessions.create(sessionParams);
   return session;

@@ -29,6 +29,7 @@ import { LegalFooter } from './components/LegalFooter';
 import { VoidDepthCounter } from './components/VoidDepthCounter';
 import { LanguageToggle } from './components/LanguageToggle';
 import { ReportModal } from './components/ReportModal';
+import { captureEndorselyViaFromUrl } from './utils/endorsely';
 import { captureRefFromUrl } from './utils/refCapture';
 import './App.css';
 
@@ -56,6 +57,7 @@ function AppContent() {
 
   useEffect(() => {
     captureRefFromUrl();
+    captureEndorselyViaFromUrl();
 
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('stripe_session');

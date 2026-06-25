@@ -452,6 +452,10 @@ router.post('/stripe/checkout', invoiceLimiter, async (req, res) => {
       checkoutUrl: session.url,
     });
 
+    if (endorselyReferral) {
+      console.log(`Stripe checkout: endorsely_referral=${endorselyReferral} tier=${tier}`);
+    }
+
     return res.status(201).json({
       mode: 'stripe',
       subscriptionId: sub.id,
