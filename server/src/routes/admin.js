@@ -29,6 +29,7 @@ import {
 import { getAuditLogs, logAction } from '../db/audit.js';
 import { isSimulatorEnabled, setSimulatorEnabled } from '../simulator.js';
 import { config } from '../config.js';
+import { isStripeConfigured } from '../services/stripe.js';
 import { getSubscriptionsAdmin, markSubscriptionPaid } from '../db/subscriptions.js';
 import { expireBurnedMessages } from '../db/store.js';
 
@@ -181,10 +182,19 @@ router.get('/audit', requireAdmin, (req, res) => {
 });
 
 router.get('/tiers', requireAdmin, (_req, res) => {
+  const stripe = isStripeConfigured();
+  const bitcoin = Boolean(config.bitcoinTipAddress);
   res.json({
     launchMode: false,
-    paymentsEnabled: Boolean(config.bitcoinTipAddress),
-    message: 'Paid tiers live — Bitcoin payments active. Access keys issued on payment.',
+    paymentsEnabled: bitcoin || stripe,
+    paymentMethods: { bitcoin, stripe },
+    message: stripe && bitcoin
+      ? 'Paid tiers live — Card (Stripe) + Bitcoin. Access keys on payment.'
+      : stripe
+        ? 'Paid tiers live — Card (Stripe) only.'
+        : bitcoin
+          ? 'Paid tiers live — Bitcoin only. Add STRIPE_SECRET_KEY for card.'
+          : 'No payments configured.',
   });
 });
 

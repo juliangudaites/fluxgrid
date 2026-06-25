@@ -15,6 +15,7 @@ import { PlansPanel } from './components/PlansPanel';
 import { DonateBanner } from './components/DonateBanner';
 import { TipModal } from './components/TipModal';
 import { TierPayModal } from './components/TierPayModal';
+import { PaymentSuccessModal } from './components/PaymentSuccessModal';
 import { SessionLimitModal } from './components/SessionLimitModal';
 import { AccessCodeModal } from './components/AccessCodeModal';
 import type { TierId } from './tiers/tiers';
@@ -67,8 +68,11 @@ function AppContent() {
         const result = await completeStripeTierCheckout(sessionId);
         if (result.paid && result.accessCode) {
           await applyAccessCode(result.accessCode);
-          setToast(`${result.tierLabel ?? 'Tier'} activated — save your access key in PLANS`);
-          setPlansOpen(true);
+          setPaymentSuccess({
+            tierName: result.tierLabel ?? 'Tier',
+            accessCode: result.accessCode,
+            expiresAt: result.expiresAt,
+          });
         } else {
           setToast('Payment pending — refresh in a moment if you completed checkout');
         }
@@ -102,6 +106,11 @@ function AppContent() {
     id: TierId;
     name: string;
     priceUsd: number;
+  } | null>(null);
+  const [paymentSuccess, setPaymentSuccess] = useState<{
+    tierName: string;
+    accessCode: string;
+    expiresAt?: string;
   } | null>(null);
   const knownIdsRef = useRef<Set<string>>(new Set());
   const initialLoadRef = useRef(true);
@@ -562,6 +571,15 @@ function AppContent() {
         onClose={() => setReportMessage(null)}
         onSuccess={handleReportSuccess}
       />
+      {paymentSuccess && (
+        <PaymentSuccessModal
+          open
+          tierName={paymentSuccess.tierName}
+          accessCode={paymentSuccess.accessCode}
+          expiresAt={paymentSuccess.expiresAt}
+          onClose={() => setPaymentSuccess(null)}
+        />
+      )}
       <Toast message={toast} visible={!!toast} />
       {welcomeOverlay}
     </div>

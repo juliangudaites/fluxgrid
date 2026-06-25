@@ -194,7 +194,8 @@ export function AdminPortal() {
               <div className="admin__guide-grid">
                 <div><strong>FREE TIER</strong><span>Fully operational — random IDs, emoji chat, channel lock</span></div>
                 <div><strong>SIMULATOR</strong><span>Main grid only — never posts on real user channels</span></div>
-                <div><strong>PAID TIERS</strong><span>LIVE — SIGNAL $6, PULSE $11, FLUX $18 via Bitcoin</span></div>
+                <div><strong>PAID TIERS</strong><span>LIVE — SIGNAL $6, PULSE $11, FLUX $18 via Card or Bitcoin</span></div>
+                <div><strong>STRIPE</strong><span>Card / Apple Pay — STRIPE_SECRET_KEY + STRIPE_WEBHOOK_SECRET in Render env</span></div>
                 <div><strong>BITCOIN</strong><span>Tips + tier payments — BITCOIN_TIP_ADDRESS in server .env</span></div>
               </div>
             </div>
@@ -389,7 +390,7 @@ export function AdminPortal() {
           <div className="admin__section">
             <div className="admin__control-card">
               <h3>Launch edition — free tier active</h3>
-              <p>Free VOID tier is always available. Paid tiers SIGNAL, PULSE, and FLUX are live via Bitcoin:</p>
+              <p>Free VOID tier is always available. Paid tiers SIGNAL, PULSE, and FLUX are live via Card (Stripe) or Bitcoin:</p>
               <ul>
                 <li>Random channel IDs, 2,000 character messages</li>
                 <li>Emoji group chat and channel lock</li>
@@ -404,7 +405,7 @@ export function AdminPortal() {
                 <li><strong>PULSE</strong> — attachments, pinning, priority styling ($11/mo)</li>
                 <li><strong>FLUX</strong> — deep void burial, burn timers ($18/mo)</li>
               </ul>
-              <p>Users pay Bitcoin → receive FG-XXXX access key → 2 devices max per key. No test codes. Confirm pending payments in admin if blockchain detection misses a tx.</p>
+              <p>Users pay via Stripe or Bitcoin → receive FG-XXXX access key → 2 devices max per key. Stripe unlocks via webhook. Confirm pending Bitcoin payments in admin if blockchain detection misses a tx.</p>
             </div>
             <div className="admin__control-card">
               <h3>Donations & tips</h3>

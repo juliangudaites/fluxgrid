@@ -36,7 +36,7 @@ export const legalDocs: Record<Lang, Record<'terms' | 'privacy' | 'aup' | 'safet
         {
           title: '4. Paid Features',
           body: [
-            'Paid tiers (vanity IDs, perks, FLUX deep void, media) are governed by separate commercial terms. All tier payments are Bitcoin only — no cards or bank accounts. FLUX buries messages mid-feed with optional burn timers for maximum anonymity.',
+            'Paid tiers (vanity IDs, perks, FLUX deep void, media) are governed by separate commercial terms. Tier payments accept card (via Stripe) or Bitcoin. No FLUXGRID accounts are created — card payments are processed by Stripe only. FLUX buries messages mid-feed with optional burn timers for maximum anonymity.',
             'Refunds are governed by our Refund Policy at purchase.',
           ],
         },

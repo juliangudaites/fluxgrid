@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTier } from '../tiers/context';
 import type { TierId } from '../tiers/tiers';
+import { usePaymentMethods } from '../hooks/usePaymentMethods';
 import './PlansPanel.css';
 
 interface PlansPanelProps {
@@ -92,8 +93,16 @@ export function PlansPanel({ open, onClose, onDonate, onBuyTier }: PlansPanelPro
   const [codeInput, setCodeInput] = useState('');
   const [codeError, setCodeError] = useState('');
   const [codeLoading, setCodeLoading] = useState(false);
+  const paymentMethods = usePaymentMethods(open);
 
   if (!open) return null;
+
+  const paidSectionTitle = paymentMethods.stripe
+    ? 'Paid tiers — Card, Apple Pay, or Bitcoin'
+    : 'Paid tiers — Card or Bitcoin';
+  const paymentBadge = paymentMethods.stripe
+    ? '💳 Card · Apple Pay · ₿ Bitcoin'
+    : '💳 Card · ₿ Bitcoin';
 
   const tipAmount = customAmount ? Number(customAmount) : selectedDonation;
   const validTip = tipAmount >= 1 && tipAmount <= 5000;
@@ -120,7 +129,7 @@ export function PlansPanel({ open, onClose, onDonate, onBuyTier }: PlansPanelPro
             <span className="plans-panel__eyebrow">LIVE · 2026 · CARD + ₿ BITCOIN TIERS</span>
             <h2 id="plans-title" className="plans-panel__title">ANONYMOUS PAID TIERS</h2>
             <p className="plans-panel__subtitle">
-              Pay Bitcoin → get a private <strong>access key</strong> → features unlock instantly.
+              Pay with <strong>card or Bitcoin</strong> → get a private <strong>access key</strong> → features unlock instantly.
               Each key works on <strong>{maxDevices} devices max</strong> — still no account or identity.
             </p>
           </div>
@@ -282,7 +291,7 @@ export function PlansPanel({ open, onClose, onDonate, onBuyTier }: PlansPanelPro
         </section>
 
         <section className="plans-panel__section">
-          <h3 className="plans-panel__section-title">Paid tiers — Bitcoin only</h3>
+          <h3 className="plans-panel__section-title">{paidSectionTitle}</h3>
           <div className="plans-grid">
             {paidTiers.map((plan) => {
               const isActive = tier === plan.id;
@@ -299,7 +308,7 @@ export function PlansPanel({ open, onClose, onDonate, onBuyTier }: PlansPanelPro
                     <div className="plan-card__price">
                       <span className="plan-card__amount">{plan.price}</span>
                       <span className="plan-card__period">{plan.period}</span>
-                      <span className="plan-card__btc">₿ Bitcoin</span>
+                      <span className="plan-card__btc">{paymentBadge}</span>
                     </div>
                     <p className="plan-card__tagline">{plan.tagline}</p>
                   </div>
@@ -316,7 +325,7 @@ export function PlansPanel({ open, onClose, onDonate, onBuyTier }: PlansPanelPro
                       className={`plan-card__cta plan-card__cta--buy ${plan.featured ? 'plan-card__cta--flux' : ''}`}
                       onClick={() => onBuyTier?.(plan.id, plan.priceUsd, plan.name)}
                     >
-                      PAY {plan.price} IN BITCOIN →
+                      GET {plan.name} — {plan.price} →
                     </button>
                   )}
                 </article>

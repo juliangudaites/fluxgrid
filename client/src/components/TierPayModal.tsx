@@ -5,12 +5,12 @@ import {
   createStripeTierCheckout,
   createTierInvoice,
   fetchTipRates,
-  fetchTierPaymentConfig,
   pollTierPaymentStatus,
   type TierInvoice,
 } from '../api';
 import type { TierId } from '../tiers/tiers';
 import { useTier } from '../tiers/context';
+import { usePaymentMethods } from '../hooks/usePaymentMethods';
 import { getStoredAffiliateRef } from '../utils/refCapture';
 import { getRewardfulReferral, waitForRewardfulReady } from '../utils/rewardful';
 import './TipModal.css';
@@ -36,6 +36,7 @@ export function TierPayModal({
 }: TierPayModalProps) {
   const { t, tList } = useI18n();
   const { applyAccessCode } = useTier();
+  const methods = usePaymentMethods(open);
   const [invoice, setInvoice] = useState<TierInvoice | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -45,7 +46,6 @@ export function TierPayModal({
   const [expiresAt, setExpiresAt] = useState('');
   const [copied, setCopied] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
-  const [methods, setMethods] = useState({ bitcoin: true, stripe: false });
 
   const reset = useCallback(() => {
     setInvoice(null);
@@ -61,9 +61,6 @@ export function TierPayModal({
   useEffect(() => {
     if (!open) return;
     reset();
-    fetchTierPaymentConfig()
-      .then((cfg) => setMethods(cfg.paymentMethods))
-      .catch(() => {});
   }, [open, reset, tierId]);
 
   useEffect(() => {
@@ -88,6 +85,10 @@ export function TierPayModal({
   if (!open) return null;
 
   const handleBitcoinPay = async () => {
+    if (!methods.bitcoin) {
+      setError(t('tierPayBtcUnavailable'));
+      return;
+    }
     setPaymentMethod('bitcoin');
     setLoading(true);
     setError('');
@@ -114,6 +115,10 @@ export function TierPayModal({
   };
 
   const handleCardPay = async () => {
+    if (!methods.stripe) {
+      setError(t('tierPayCardUnavailable'));
+      return;
+    }
     setPaymentMethod('stripe');
     setLoading(true);
     setError('');
@@ -140,6 +145,7 @@ export function TierPayModal({
   };
 
   const showMethodPicker = !invoice && !paid && paymentMethod === null;
+  const showBackToMethods = paymentMethod !== null && !invoice && !paid && !loading;
 
   return (
     <div className="tip-overlay" onClick={onClose}>
@@ -163,25 +169,45 @@ export function TierPayModal({
             </ul>
             <p className="tip-modal__method-label">{t('tierPayChooseMethod')}</p>
             <div className="tip-modal__methods">
-              {methods.stripe && (
-                <button type="button" className="tip-modal__method tip-modal__method--card" onClick={handleCardPay} disabled={loading}>
-                  <span className="tip-modal__method-title">{t('tierPayCardTitle')}</span>
-                  <span className="tip-modal__method-desc">{t('tierPayCardDesc')}</span>
-                </button>
-              )}
-              {methods.bitcoin && (
-                <button type="button" className="tip-modal__method tip-modal__method--btc" onClick={handleBitcoinPay} disabled={loading}>
-                  <span className="tip-modal__method-title">{t('tierPayBtcTitle')}</span>
-                  <span className="tip-modal__method-desc">{t('tierPayBtcDesc')}</span>
-                </button>
-              )}
+              <button
+                type="button"
+                className={`tip-modal__method tip-modal__method--card ${!methods.stripe ? 'tip-modal__method--dim' : ''}`}
+                onClick={handleCardPay}
+                disabled={loading}
+              >
+                <span className="tip-modal__method-title">{t('tierPayCardTitle')}</span>
+                <span className="tip-modal__method-desc">
+                  {methods.stripe ? t('tierPayCardDesc') : t('tierPayCardPending')}
+                </span>
+              </button>
+              <button
+                type="button"
+                className={`tip-modal__method tip-modal__method--btc ${!methods.bitcoin ? 'tip-modal__method--dim' : ''}`}
+                onClick={handleBitcoinPay}
+                disabled={loading}
+              >
+                <span className="tip-modal__method-title">{t('tierPayBtcTitle')}</span>
+                <span className="tip-modal__method-desc">{t('tierPayBtcDesc')}</span>
+              </button>
             </div>
             {error && <p className="tip-modal__error">{error}</p>}
           </div>
         )}
 
+        {showBackToMethods && (
+          <div className="tip-modal__body">
+            {error && <p className="tip-modal__error">{error}</p>}
+            <button type="button" className="tip-modal__back" onClick={() => { setPaymentMethod(null); setError(''); }}>
+              ← {t('tierPayChooseMethod')}
+            </button>
+          </div>
+        )}
+
         {invoice && invoice.mode !== 'stripe' && !paid && (
           <div className="tip-modal__body">
+            <button type="button" className="tip-modal__back" onClick={reset}>
+              ← {t('tierPayChooseMethod')}
+            </button>
             <p className="tip-modal__amount">
               {t('tierPayExactBtc')}: <strong>{invoice.amountBtc} BTC</strong>
             </p>
