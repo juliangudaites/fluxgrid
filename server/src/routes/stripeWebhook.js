@@ -44,7 +44,7 @@ async function fulfillStripeSession(session) {
     mode: 'stripe',
     stripeSessionId: session.id,
     stripePaymentIntentId: session.payment_intent?.id || session.payment_intent || null,
-    referral: session.metadata?.referral || session.client_reference_id || null,
+    endorselyReferral: session.metadata?.endorsely_referral || session.client_reference_id || null,
     affiliateRef: session.metadata?.affiliate_ref || null,
   });
 }

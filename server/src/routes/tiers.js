@@ -368,7 +368,7 @@ router.get('/invoice/:subscriptionId/status', async (req, res) => {
         const paid = markSubscriptionPaid(sub.id, {
           stripeSessionId: session.id,
           stripePaymentIntentId: session.payment_intent?.id || session.payment_intent || null,
-          referral: session.metadata?.referral || session.client_reference_id || null,
+          endorselyReferral: session.metadata?.endorsely_referral || session.client_reference_id || null,
           affiliateRef: session.metadata?.affiliate_ref || null,
         });
         return res.json({
@@ -419,7 +419,8 @@ router.post('/stripe/checkout', invoiceLimiter, async (req, res) => {
     currency === 'USD' ? amount : (amount / rates.brl) * rates.usd;
   const amountBrl = currency === 'BRL' ? amount : (amount / rates.usd) * rates.brl;
 
-  const referral = typeof req.body?.referral === 'string' ? req.body.referral.trim() : '';
+  const endorselyReferral =
+    typeof req.body?.endorselyReferral === 'string' ? req.body.endorselyReferral.trim() : '';
   const affiliateRef = typeof req.body?.affiliateRef === 'string' ? req.body.affiliateRef.trim() : '';
 
   try {
@@ -429,7 +430,7 @@ router.post('/stripe/checkout', invoiceLimiter, async (req, res) => {
       amountUsd: Math.round(computedUsd * 100) / 100,
       amountBrl: Math.round(amountBrl * 100) / 100,
       mode: 'stripe',
-      referral: referral || null,
+      endorselyReferral: endorselyReferral || null,
       affiliateRef: affiliateRef || null,
     });
 
@@ -440,7 +441,7 @@ router.post('/stripe/checkout', invoiceLimiter, async (req, res) => {
       tierLabel: TIER_CAPS[tier].label,
       amountUsd: computedUsd,
       currency: currency === 'BRL' ? 'brl' : 'usd',
-      referral: referral || undefined,
+      endorselyReferral: endorselyReferral || undefined,
       affiliateRef: affiliateRef || undefined,
       successUrl: `${baseUrl}/?stripe_session={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${baseUrl}/?stripe_cancel=1`,
@@ -500,7 +501,7 @@ router.get('/stripe/complete', async (req, res) => {
         mode: 'stripe',
         stripeSessionId: session.id,
         stripePaymentIntentId: session.payment_intent?.id || session.payment_intent || null,
-        referral: session.metadata?.referral || session.client_reference_id || null,
+        endorselyReferral: session.metadata?.endorsely_referral || session.client_reference_id || null,
         affiliateRef: session.metadata?.affiliate_ref || null,
       });
     }

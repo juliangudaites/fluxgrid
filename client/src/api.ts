@@ -187,7 +187,7 @@ export async function createTierInvoice(tier: TierId, currency: 'USD' | 'BRL' = 
 export async function createStripeTierCheckout(
   tier: TierId,
   currency: 'USD' | 'BRL' = 'USD',
-  opts?: { referral?: string; affiliateRef?: string }
+  opts?: { endorselyReferral?: string; affiliateRef?: string }
 ): Promise<TierInvoice> {
   return fetchJson<TierInvoice>('/api/tiers/stripe/checkout', {
     method: 'POST',
@@ -195,7 +195,7 @@ export async function createStripeTierCheckout(
     body: JSON.stringify({
       tier,
       currency,
-      referral: opts?.referral,
+      endorselyReferral: opts?.endorselyReferral,
       affiliateRef: opts?.affiliateRef,
     }),
     timeoutMs: 12_000,

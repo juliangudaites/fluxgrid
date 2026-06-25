@@ -12,7 +12,7 @@ import type { TierId } from '../tiers/tiers';
 import { useTier } from '../tiers/context';
 import { usePaymentMethods } from '../hooks/usePaymentMethods';
 import { getStoredAffiliateRef } from '../utils/refCapture';
-import { getRewardfulReferral, waitForRewardfulReady } from '../utils/rewardful';
+import { getEndorselyReferral, waitForEndorselyReferral } from '../utils/endorsely';
 import './TipModal.css';
 
 type PaymentMethod = 'stripe' | 'bitcoin';
@@ -123,9 +123,9 @@ export function TierPayModal({
     setLoading(true);
     setError('');
     try {
-      await waitForRewardfulReady();
+      await waitForEndorselyReferral();
       const inv = await createStripeTierCheckout(tierId, 'USD', {
-        referral: getRewardfulReferral(),
+        endorselyReferral: getEndorselyReferral(),
         affiliateRef: getStoredAffiliateRef(),
       });
       if (!inv.checkoutUrl) throw new Error('Stripe checkout unavailable');

@@ -40,7 +40,7 @@ export async function createTierCheckoutSession({
   tierLabel,
   amountUsd,
   currency,
-  referral,
+  endorselyReferral,
   affiliateRef,
   successUrl,
   cancelUrl,
@@ -56,7 +56,7 @@ export async function createTierCheckoutSession({
     tier: String(tier),
     type: 'fluxgrid_tier',
   };
-  if (referral) metadata.referral = String(referral).slice(0, 200);
+  if (endorselyReferral) metadata.endorsely_referral = String(endorselyReferral).slice(0, 200);
   if (affiliateRef) metadata.affiliate_ref = String(affiliateRef).slice(0, 100);
 
   const sessionParams = {
@@ -80,7 +80,7 @@ export async function createTierCheckoutSession({
     metadata,
   };
 
-  const ref = referral ? String(referral).slice(0, 200) : '';
+  const ref = endorselyReferral ? String(endorselyReferral).slice(0, 200) : '';
   if (ref) sessionParams.client_reference_id = ref;
 
   const session = await stripe.checkout.sessions.create(sessionParams);

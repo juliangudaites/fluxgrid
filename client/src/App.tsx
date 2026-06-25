@@ -30,7 +30,6 @@ import { VoidDepthCounter } from './components/VoidDepthCounter';
 import { LanguageToggle } from './components/LanguageToggle';
 import { ReportModal } from './components/ReportModal';
 import { captureRefFromUrl } from './utils/refCapture';
-import { initRewardful } from './utils/rewardful';
 import './App.css';
 
 const FEED_POLL_MS = 2200;
@@ -57,7 +56,6 @@ function AppContent() {
 
   useEffect(() => {
     captureRefFromUrl();
-    initRewardful(import.meta.env.VITE_REWARDFUL_API_KEY);
 
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('stripe_session');
