@@ -4,10 +4,12 @@ services:
     name: fluxgrid
     runtime: node
     plan: free
-    buildCommand: npm install --prefix server && npm install --prefix client && npm run build --prefix client
-    startCommand: cd server && node src/index.js
+    buildCommand: npm install --prefix server && npm install --prefix client --include=dev && npm run build --prefix client
+    startCommand: node server/src/index.js
     healthCheckPath: /api/health
     envVars:
+      - key: NODE_VERSION
+        value: "22"
       - key: NODE_ENV
         value: production
       - key: BITCOIN_TIP_ADDRESS
