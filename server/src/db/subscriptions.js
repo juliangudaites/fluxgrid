@@ -46,6 +46,12 @@ export function getSubscriptionById(id) {
   return store.subscriptions.find((s) => s.id === id) ?? null;
 }
 
+export function getSubscriptionByStripeSessionId(sessionId) {
+  if (!sessionId) return null;
+  const store = readStore();
+  return store.subscriptions.find((s) => s.stripeSessionId === sessionId) ?? null;
+}
+
 export function getActiveSubscriptionByCode(code) {
   if (!code) return null;
   const normalized = String(code).trim().toUpperCase();

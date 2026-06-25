@@ -13,14 +13,24 @@ https://github.com/new
   Create repository
 
 ────────────────────────────────────────────
-2. Push from your PC (1 command)
+2. Push from your PC
 ────────────────────────────────────────────
-PowerShell:
+EASIEST — double-click this file in File Explorer:
 
-  cd C:\Users\julia\voidlink\deploy
-  .\push-to-github.ps1 -GitHubUsername YOUR_GITHUB_USERNAME
+  C:\Users\julia\voidlink\deploy\push-to-github.cmd
 
-(Log in when GitHub prompts you.)
+Type your GitHub username when asked. Log in if GitHub prompts you.
+
+── OR paste these ONE LINE AT A TIME in PowerShell ──
+(Replace YOUR_GITHUB_USERNAME — run each line separately)
+
+  cd C:\Users\julia\voidlink
+  git remote add origin https://github.com/YOUR_GITHUB_USERNAME/fluxgrid.git
+  git branch -M main
+  git push -u origin main
+
+If "remote origin already exists", run this first instead of "git remote add":
+  git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/fluxgrid.git
 
 ────────────────────────────────────────────
 3. Render — deploy (5 min)

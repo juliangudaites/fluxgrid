@@ -20,14 +20,22 @@ export const translations = {
     accessKeyApply: 'ACTIVATE',
     accessKeyHint:
       'Paste the private key you received after your Bitcoin payment. No account — this key is your only credential. If you lose it, tier access cannot be recovered.',
+    tierPayEyebrow: 'ANONYMOUS ACCESS · NO ACCOUNT',
+    tierPayIntro:
+      'Pay with card or Bitcoin. You receive a private access key — your only credential. Max 2 devices per key. No email, no username, no recovery if lost.',
+    tierPayChooseMethod: 'Choose payment method',
+    tierPayCardTitle: 'CARD / APPLE PAY — INSTANT',
+    tierPayCardDesc: 'Stripe checkout. Fast unlock. Best for affiliates and standard purchases.',
+    tierPayBtcTitle: '₿ BITCOIN — MAXIMUM PRIVACY',
+    tierPayBtcDesc: 'No card trail. Send exact BTC amount. Unique satoshi suffix identifies your purchase.',
     tierCheckoutTitle: 'Before you pay — read carefully',
     tierCheckoutItems: [
       'You receive a private access key (e.g. FG-SIGN-XXXX) — not an account. There is no email, password reset, or support lookup.',
       'If you lose your access key, you lose your paid tier permanently. We cannot recover it. Copy and store it somewhere safe before closing this window.',
       'Each key works on 2 devices maximum. If a third device tries to connect, you must disconnect an existing session in PLANS before the new device can activate.',
       'To use your key on another phone or browser, copy it manually and paste it under ACCESS KEY or in PLANS → Your access.',
-      'Payment uses the same Bitcoin wallet as tips. Send the exact BTC amount shown — a unique satoshi suffix identifies your tier purchase.',
-      'Features unlock for 30 days from payment. When expired, you need a new Bitcoin payment and a new key.',
+      'Card or Bitcoin — same access key format. Bitcoin uses exact BTC amount with unique satoshi suffix for auto-detection.',
+      'Features unlock for 30 days from payment. When expired, you need a new payment and a new key.',
     ],
     tierPayDuringTitle: 'While payment is processing',
     tierPayDuringItems: [
@@ -297,14 +305,22 @@ export const translations = {
     accessKeyApply: 'ATIVAR',
     accessKeyHint:
       'Cole a chave privada recebida após o pagamento Bitcoin. Sem conta — esta chave é sua única credencial. Se perder, o acesso ao plano não pode ser recuperado.',
+    tierPayEyebrow: 'ACESSO ANÔNIMO · SEM CONTA',
+    tierPayIntro:
+      'Pague com cartão ou Bitcoin. Você recebe uma chave de acesso privada — sua única credencial. Máx. 2 dispositivos por chave. Sem e-mail, sem usuário, sem recuperação se perder.',
+    tierPayChooseMethod: 'Escolha a forma de pagamento',
+    tierPayCardTitle: 'CARTÃO / APPLE PAY — INSTANTÂNEO',
+    tierPayCardDesc: 'Checkout Stripe. Desbloqueio rápido. Ideal para compras padrão.',
+    tierPayBtcTitle: '₿ BITCOIN — MÁXIMA PRIVACIDADE',
+    tierPayBtcDesc: 'Sem rastro de cartão. Envie o valor exato em BTC. Sufixo único em satoshis identifica sua compra.',
     tierCheckoutTitle: 'Antes de pagar — leia com atenção',
     tierCheckoutItems: [
       'Você recebe uma chave de acesso privada (ex. FG-SIGN-XXXX) — não uma conta. Sem e-mail, sem recuperação de senha, sem busca por suporte.',
       'Se perder sua chave de acesso, perde o plano pago permanentemente. Não podemos recuperá-la. Copie e guarde em local seguro antes de fechar esta janela.',
       'Cada chave funciona em no máximo 2 dispositivos. Se um terceiro tentar conectar, desconecte uma sessão existente em PLANOS antes de ativar o novo dispositivo.',
       'Para usar em outro celular ou navegador, copie manualmente e cole em CHAVE DE ACESSO ou em PLANOS → Seu acesso.',
-      'O pagamento usa a mesma carteira Bitcoin das gorjetas. Envie o valor exato em BTC — um sufixo único em satoshis identifica sua compra.',
-      'Recursos ficam ativos por 30 dias após o pagamento. Ao expirar, é necessário novo pagamento Bitcoin e nova chave.',
+      'Cartão ou Bitcoin — mesmo formato de chave. Bitcoin usa valor exato em BTC com sufixo único para detecção automática.',
+      'Recursos ficam ativos por 30 dias após o pagamento. Ao expirar, é necessário novo pagamento e nova chave.',
     ],
     tierPayDuringTitle: 'Enquanto o pagamento processa',
     tierPayDuringItems: [

@@ -37,7 +37,7 @@ const paidTiers = [
       'Reserve a custom ID (LOVE, NYC, VOID-7)',
       'Memorable codes for real-life sharing',
       'Anonymous access key — no account',
-      'Paid via Bitcoin only',
+      'Paid via card or Bitcoin',
     ],
   },
   {
@@ -117,7 +117,7 @@ export function PlansPanel({ open, onClose, onDonate, onBuyTier }: PlansPanelPro
       <div className="plans-panel" onClick={(e) => e.stopPropagation()} role="dialog" aria-labelledby="plans-title">
         <header className="plans-panel__header">
           <div>
-            <span className="plans-panel__eyebrow">LIVE · 2026 · ₿ BITCOIN TIERS</span>
+            <span className="plans-panel__eyebrow">LIVE · 2026 · CARD + ₿ BITCOIN TIERS</span>
             <h2 id="plans-title" className="plans-panel__title">ANONYMOUS PAID TIERS</h2>
             <p className="plans-panel__subtitle">
               Pay Bitcoin → get a private <strong>access key</strong> → features unlock instantly.

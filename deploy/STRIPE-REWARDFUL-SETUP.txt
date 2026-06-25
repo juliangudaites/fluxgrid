@@ -1,0 +1,131 @@
+FLUXGRID — Stripe + Rewardful setup (step by step)
+==================================================
+
+Code is ready. After you complete these steps, users can pay with
+CARD or BITCOIN. Affiliates earn commission on card sales via Rewardful.
+
+────────────────────────────────────────────
+PART 1 — STRIPE (15 min)
+────────────────────────────────────────────
+
+1. Create account: https://dashboard.stripe.com/register
+
+2. Stay in TEST MODE first (toggle top-right).
+
+3. Get API keys:
+   Developers → API keys
+   Copy:
+     - Secret key  → STRIPE_SECRET_KEY (starts with sk_test_)
+
+4. Create webhook (for instant access key unlock):
+
+   LOCAL TEST (optional):
+     Install Stripe CLI: https://stripe.com/docs/stripe-cli
+     stripe login
+     stripe listen --forward-to localhost:3001/api/stripe/webhook
+     Copy the whsec_... secret it prints → STRIPE_WEBHOOK_SECRET
+
+   PRODUCTION (Render):
+     Developers → Webhooks → Add endpoint
+     URL: https://fluxgrid.onrender.com/api/stripe/webhook
+     Events: checkout.session.completed
+     Copy Signing secret → STRIPE_WEBHOOK_SECRET
+
+5. Add env vars:
+
+   LOCAL (server/.env):
+     STRIPE_SECRET_KEY=sk_test_...
+     STRIPE_WEBHOOK_SECRET=whsec_...
+     PUBLIC_APP_URL=http://localhost:3001
+
+   RENDER (Dashboard → fluxgrid → Environment):
+     STRIPE_SECRET_KEY=sk_live_...        (when going live)
+     STRIPE_WEBHOOK_SECRET=whsec_...
+     PUBLIC_APP_URL=https://fluxgrid.onrender.com
+
+6. Test card payment:
+     PLANS → buy SIGNAL → Card / Apple Pay
+     Test card: 4242 4242 4242 4242, any future date, any CVC
+
+7. Go LIVE when ready:
+     Stripe → toggle to Live mode
+     Create new live webhook + live secret key
+     Update Render env vars with sk_live_ and live whsec_
+
+────────────────────────────────────────────
+PART 2 — REWARDFUL (10 min)
+────────────────────────────────────────────
+
+1. Sign up: https://www.getrewardful.com/
+
+2. Create campaign:
+     Name: FLUXGRID Affiliates
+     Commission: 30% (or your choice)
+     Cookie duration: 60 days
+
+3. Connect Stripe:
+     Rewardful → Integrations → Stripe → Connect
+     (Uses same Stripe account from Part 1)
+
+4. Get your public API key:
+     Rewardful → Setup → JavaScript snippet
+     Copy the value in data-rewardful="XXXX"
+     That XXXX is your VITE_REWARDFUL_API_KEY
+
+5. Add to build env:
+
+   LOCAL — create client/.env:
+     VITE_REWARDFUL_API_KEY=your_rewardful_public_key
+
+   RENDER — add env var (rebuild required):
+     VITE_REWARDFUL_API_KEY=your_rewardful_public_key
+
+   Then redeploy / rebuild client:
+     npm run build --prefix client
+
+6. Affiliate signup link:
+     Rewardful gives you: https://fluxgrid.getrewardful.com/signup
+     (or similar — copy from Rewardful dashboard)
+
+7. How tracking works (already wired in code):
+     - Rewardful script loads on site
+     - Affiliate link sets cookie
+     - User pays with CARD → referral sent to Stripe as client_reference_id
+     - Rewardful auto-credits affiliate commission
+
+8. Bitcoin sales:
+     Rewardful does NOT auto-track Bitcoin.
+     Use ?ref=CODE links + manual spreadsheet OR add later.
+
+────────────────────────────────────────────
+PART 3 — DEPLOY (5 min)
+────────────────────────────────────────────
+
+1. Commit and push code to GitHub
+2. Render auto-redeploys
+3. Confirm env vars are set (see Part 1 + 2)
+4. Test live: https://fluxgrid.onrender.com/plans
+
+────────────────────────────────────────────
+PART 4 — LIST ON AFFILIATE DIRECTORIES
+────────────────────────────────────────────
+
+After Stripe + Rewardful work:
+
+1. https://affiliate.watch/submit-affiliate-program
+2. Share Rewardful signup link with privacy/crypto promoters
+3. Optional: PartnerStack (after you have sales history)
+
+────────────────────────────────────────────
+QUICK CHECKLIST
+────────────────────────────────────────────
+
+[ ] STRIPE_SECRET_KEY in Render
+[ ] STRIPE_WEBHOOK_SECRET in Render (production webhook URL)
+[ ] PUBLIC_APP_URL=https://fluxgrid.onrender.com
+[ ] VITE_REWARDFUL_API_KEY in Render (rebuild)
+[ ] Rewardful connected to Stripe
+[ ] Test card purchase unlocks access key
+[ ] Affiliate signup link shared
+
+Support: BITCOIN still works unchanged for privacy users.

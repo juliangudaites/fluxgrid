@@ -5,11 +5,14 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-Set-Location $PSScriptRoot\..
+Set-Location (Join-Path $PSScriptRoot "..")
 
 $remote = "https://github.com/$GitHubUsername/fluxgrid.git"
 
-if (git remote get-url origin 2>$null) {
+$hasOrigin = $false
+git remote 2>$null | ForEach-Object { if ($_ -eq "origin") { $hasOrigin = $true } }
+
+if ($hasOrigin) {
   git remote set-url origin $remote
   Write-Host "Updated origin -> $remote"
 } else {

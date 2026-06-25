@@ -148,20 +148,31 @@ export async function fetchTierMe(): Promise<TierRedeemResult & { source: string
   return fetchJson('/api/tiers/me', { headers: tierHeaders(), timeoutMs: 8_000 });
 }
 
+export interface TierPaymentConfig {
+  enabled: boolean;
+  paymentMethods: { bitcoin: boolean; stripe: boolean };
+  subscriptionDays: number;
+}
+
 export interface TierInvoice {
-  mode: 'btcpay' | 'static';
+  mode: 'btcpay' | 'static' | 'stripe';
   subscriptionId: string;
   tier: TierId;
   tierLabel: string;
   address?: string;
-  amountBtc: string;
+  amountBtc?: string;
   amountUsd: number;
   amountBrl: number;
   paymentUri?: string;
   checkoutUrl?: string;
   invoiceId?: string;
+  stripeSessionId?: string;
   currency: string;
   message?: string;
+}
+
+export async function fetchTierPaymentConfig(): Promise<TierPaymentConfig> {
+  return fetchJson<TierPaymentConfig>('/api/tiers/config', { timeoutMs: 8_000 });
 }
 
 export async function createTierInvoice(tier: TierId, currency: 'USD' | 'BRL' = 'USD'): Promise<TierInvoice> {
@@ -169,6 +180,38 @@ export async function createTierInvoice(tier: TierId, currency: 'USD' | 'BRL' = 
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ tier, currency }),
+    timeoutMs: 12_000,
+  });
+}
+
+export async function createStripeTierCheckout(
+  tier: TierId,
+  currency: 'USD' | 'BRL' = 'USD',
+  opts?: { referral?: string; affiliateRef?: string }
+): Promise<TierInvoice> {
+  return fetchJson<TierInvoice>('/api/tiers/stripe/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      tier,
+      currency,
+      referral: opts?.referral,
+      affiliateRef: opts?.affiliateRef,
+    }),
+    timeoutMs: 12_000,
+  });
+}
+
+export async function completeStripeTierCheckout(sessionId: string): Promise<{
+  paid: boolean;
+  status: string;
+  accessCode?: string;
+  tier?: TierId;
+  tierLabel?: string;
+  expiresAt?: string;
+  caps?: TierCaps;
+}> {
+  return fetchJson(`/api/tiers/stripe/complete?session_id=${encodeURIComponent(sessionId)}`, {
     timeoutMs: 12_000,
   });
 }

@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { existsSync } from 'fs';
+import stripeWebhookRouter from './routes/stripeWebhook.js';
 import healthRouter from './routes/health.js';
 import messagesRouter from './routes/messages.js';
 import reportsRouter from './routes/reports.js';
@@ -26,6 +27,11 @@ app.use(cors({
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Admin-Pin', 'X-Fluxgrid-Code', 'X-Fluxgrid-Device'],
 }));
+app.use(
+  '/api/stripe/webhook',
+  express.raw({ type: 'application/json' }),
+  stripeWebhookRouter
+);
 app.use(express.json({ limit: '6mb' }));
 app.use('/api', globalLimiter);
 

@@ -18,4 +18,7 @@ export const config = {
   btcpayStoreId: process.env.BTCPAY_STORE_ID || '',
   btcpayApiKey: process.env.BTCPAY_API_KEY || '',
   tipSuccessUrl: process.env.TIP_SUCCESS_URL || '',
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
+  stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || '',
+  publicAppUrl: process.env.PUBLIC_APP_URL || process.env.RENDER_EXTERNAL_URL || '',
 };

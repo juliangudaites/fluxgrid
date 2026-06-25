@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { fetchLiveMessages, fetchRecentMessages, fetchThread, fetchThreadMeta, postMessage } from './api';
+import { completeStripeTierCheckout, fetchLiveMessages, fetchRecentMessages, fetchThread, fetchThreadMeta, postMessage } from './api';
 import type { Message, ThreadMeta } from './types';
 import { getStoredEmoji } from './emojis';
 import { useI18n } from './i18n/context';
@@ -28,6 +28,8 @@ import { LegalFooter } from './components/LegalFooter';
 import { VoidDepthCounter } from './components/VoidDepthCounter';
 import { LanguageToggle } from './components/LanguageToggle';
 import { ReportModal } from './components/ReportModal';
+import { captureRefFromUrl } from './utils/refCapture';
+import { initRewardful } from './utils/rewardful';
 import './App.css';
 
 const FEED_POLL_MS = 2200;
@@ -48,8 +50,34 @@ function AppContent() {
     revokeSession,
     closeDeviceLimit,
     handleDeviceLimitError,
+    applyAccessCode,
   } = useTier();
   const [onboarding, setOnboarding] = useState<'age' | 'welcome' | 'done'>('age');
+
+  useEffect(() => {
+    captureRefFromUrl();
+    initRewardful(import.meta.env.VITE_REWARDFUL_API_KEY);
+
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('stripe_session');
+    if (!sessionId) return;
+
+    (async () => {
+      try {
+        const result = await completeStripeTierCheckout(sessionId);
+        if (result.paid && result.accessCode) {
+          await applyAccessCode(result.accessCode);
+          setToast(`${result.tierLabel ?? 'Tier'} activated — save your access key in PLANS`);
+          setPlansOpen(true);
+        } else {
+          setToast('Payment pending — refresh in a moment if you completed checkout');
+        }
+      } catch {
+        setToast('Payment verification failed — contact support if you were charged');
+      }
+      window.history.replaceState({}, '', window.location.pathname);
+    })();
+  }, [applyAccessCode]);
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [totalCount, setTotalCount] = useState(0);
