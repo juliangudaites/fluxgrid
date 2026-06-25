@@ -12,6 +12,7 @@ import {
   createTierCheckoutSession,
   retrieveCheckoutSession,
   getPublicAppUrl,
+  formatStripeError,
 } from '../services/stripe.js';
 import {
   createSubscription,
@@ -463,8 +464,12 @@ router.post('/stripe/checkout', invoiceLimiter, async (req, res) => {
       message: 'Complete payment on Stripe. Your private access key unlocks instantly when payment confirms.',
     });
   } catch (err) {
-    console.error('Stripe checkout error:', err);
-    return res.status(500).json({ error: 'Could not create card checkout. Try again.' });
+    const message = formatStripeError(err);
+    console.error('Stripe checkout error:', message, err?.type || err);
+    return res.status(500).json({
+      error: message,
+      code: err?.code || 'STRIPE_CHECKOUT_FAILED',
+    });
   }
 });
 

@@ -4,7 +4,7 @@ import { config } from '../config.js';
 let stripeClient = null;
 
 export function isStripeConfigured() {
-  return Boolean(config.stripeSecretKey);
+  return Boolean(config.stripeSecretKey?.trim());
 }
 
 function getStripe() {
@@ -12,9 +12,7 @@ function getStripe() {
     throw new Error('Stripe not configured');
   }
   if (!stripeClient) {
-    stripeClient = new Stripe(config.stripeSecretKey, {
-      apiVersion: '2024-11-20.acacia',
-    });
+    stripeClient = new Stripe(config.stripeSecretKey.trim());
   }
   return stripeClient;
 }
@@ -24,6 +22,16 @@ export function getPublicAppUrl(req) {
   const proto = req.headers['x-forwarded-proto'] || req.protocol || 'https';
   const host = req.headers['x-forwarded-host'] || req.get('host');
   return `${proto}://${host}`;
+}
+
+export function formatStripeError(err) {
+  if (err?.type === 'StripeInvalidRequestError') {
+    return err.message || 'Stripe request invalid';
+  }
+  if (err?.type === 'StripeAuthenticationError') {
+    return 'Stripe API key is invalid — check STRIPE_SECRET_KEY on Render';
+  }
+  return err?.message || 'Stripe checkout failed';
 }
 
 export async function createTierCheckoutSession({
@@ -38,20 +46,22 @@ export async function createTierCheckoutSession({
   cancelUrl,
 }) {
   const stripe = getStripe();
-  const unitAmount = Math.round(amountUsd * 100);
-  if (unitAmount < 50) throw new Error('Invalid tier amount');
+  const unitAmount = Math.round(Number(amountUsd) * 100);
+  if (!Number.isFinite(unitAmount) || unitAmount < 50) {
+    throw new Error('Invalid tier amount');
+  }
 
   const metadata = {
-    subscriptionId,
-    tier,
+    subscriptionId: String(subscriptionId),
+    tier: String(tier),
     type: 'fluxgrid_tier',
   };
   if (referral) metadata.referral = String(referral).slice(0, 200);
   if (affiliateRef) metadata.affiliate_ref = String(affiliateRef).slice(0, 100);
 
-  const session = await stripe.checkout.sessions.create({
+  const sessionParams = {
     mode: 'payment',
-    automatic_payment_methods: { enabled: true },
+    payment_method_types: ['card'],
     line_items: [
       {
         price_data: {
@@ -59,7 +69,7 @@ export async function createTierCheckoutSession({
           unit_amount: unitAmount,
           product_data: {
             name: `FLUXGRID ${tierLabel}`,
-            description: '30-day anonymous access key — no account required',
+            description: '30-day anonymous access key',
           },
         },
         quantity: 1,
@@ -67,13 +77,13 @@ export async function createTierCheckoutSession({
     ],
     success_url: successUrl,
     cancel_url: cancelUrl,
-    client_reference_id: referral ? String(referral).slice(0, 200) : undefined,
     metadata,
-    payment_intent_data: {
-      metadata,
-    },
-  });
+  };
 
+  const ref = referral ? String(referral).slice(0, 200) : '';
+  if (ref) sessionParams.client_reference_id = ref;
+
+  const session = await stripe.checkout.sessions.create(sessionParams);
   return session;
 }
 
@@ -85,6 +95,9 @@ export async function retrieveCheckoutSession(sessionId) {
 }
 
 export function verifyWebhookSignature(rawBody, signature) {
+  if (!config.stripeWebhookSecret?.trim()) {
+    throw new Error('STRIPE_WEBHOOK_SECRET not configured');
+  }
   const stripe = getStripe();
-  return stripe.webhooks.constructEvent(rawBody, signature, config.stripeWebhookSecret);
+  return stripe.webhooks.constructEvent(rawBody, signature, config.stripeWebhookSecret.trim());
 }
