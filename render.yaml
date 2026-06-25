@@ -1,0 +1,18 @@
+# FLUXGRID on Render — permanent URL: https://fluxgrid.onrender.com
+services:
+  - type: web
+    name: fluxgrid
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix server && npm install --prefix client && npm run build --prefix client
+    startCommand: cd server && node src/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BITCOIN_TIP_ADDRESS
+        value: bc1qe2tgy9d9m5h0l5xk5j00k4lvgpr0ggc3jye4jt
+      - key: MAX_MESSAGES
+        value: "5000"
+      - key: ADMIN_PIN
+        sync: false

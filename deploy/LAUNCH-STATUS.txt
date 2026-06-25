@@ -1,0 +1,25 @@
+FLUXGRID — LAUNCH STATUS (2026)
+================================
+
+OPERATIONAL
+-----------
+- Free VOID tier: live
+- Paid tiers SIGNAL ($6), PULSE ($11), FLUX ($18): LIVE via Bitcoin
+- Access keys issued on payment (FG-XXXX format)
+- 2 devices max per access key
+- Bitcoin tips: same wallet as tier payments
+- Admin: /admin (set ADMIN_PIN in server/.env)
+- Domain target: fluxgrid.duckdns.org
+
+NO TEST MODE
+------------
+- Test codes removed (TEST-SIGNAL, TEST-PULSE, TEST-FLUX)
+- Only real Bitcoin-generated access keys work
+
+LAUNCH COMMANDS (Windows)
+-------------------------
+1. Build:  cd C:\Users\julia\voidlink && npm run build
+2. Start:  deploy\start-fluxgrid.ps1  (Admin PowerShell for port 80)
+3. HTTPS:  deploy\start-tunnel-quick.ps1  (Cloudflare tunnel)
+
+DuckDNS: point fluxgrid.duckdns.org to your public IP, or use Cloudflare tunnel hostname.

@@ -1,0 +1,106 @@
+.emoji-picker {
+  margin-top: var(--space-2);
+}
+
+.emoji-picker--compact .emoji-picker__hint {
+  display: none;
+}
+
+.emoji-picker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.emoji-picker__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.emoji-picker__toggle {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--neon-cyan);
+  padding: 4px 8px;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-pill);
+  transition: all 0.15s;
+}
+
+.emoji-picker__toggle:hover {
+  background: rgba(0, 240, 255, 0.08);
+}
+
+.emoji-picker--collapsible .emoji-picker__grid {
+  max-height: 96px;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  margin-top: var(--space-2);
+}
+
+.emoji-picker--collapsible .emoji-picker__btn {
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+}
+
+.emoji-picker__label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.emoji-picker__selected {
+  font-size: 1.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px var(--glow-cyan));
+}
+
+.emoji-picker__hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  line-height: 1.4;
+}
+
+.emoji-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 6px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: var(--space-2);
+  background: rgba(10, 10, 20, 0.5);
+  border: 1px solid rgba(0, 240, 255, 0.12);
+  border-radius: var(--radius-sm);
+}
+
+.emoji-picker__btn {
+  width: 40px;
+  height: 40px;
+  font-size: 1.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-picker__btn:hover {
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.25);
+  transform: scale(1.08);
+}
+
+.emoji-picker__btn--active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px var(--glow-cyan);
+}

@@ -1,0 +1,16 @@
+.burn-countdown {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--neon-amber);
+  background: rgba(255, 176, 32, 0.1);
+  border: 1px solid rgba(255, 176, 32, 0.3);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  animation: burn-pulse 1s ease-in-out infinite;
+}
+
+@keyframes burn-pulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; box-shadow: 0 0 8px rgba(255, 176, 32, 0.25); }
+}

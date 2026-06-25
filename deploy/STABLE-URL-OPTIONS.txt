@@ -1,0 +1,32 @@
+FLUXGRID — PERMANENT URL FOR AFFILIATES (pick one)
+===================================================
+
+PROBLEM: https://....trycloudflare.com changes every restart. DO NOT use for affiliates.
+
+OPTION 1 — RENDER CLOUD (RECOMMENDED, no ISP needed)
+  URL:     https://fluxgrid.onrender.com  (permanent)
+  Setup:   See DEPLOY-RENDER.txt
+  Cost:    Free (or $7/mo always-on for affiliates)
+  Pros:    Same link forever, HTTPS, no router, no ISP bots
+  Cons:    Free tier sleeps when idle; data on Render not your PC
+
+OPTION 2 — YOUR DOMAIN + CLOUDFLARE TUNNEL (run from your PC)
+  URL:     https://yourdomain.com  (permanent)
+  Setup:   Buy domain (~$10/yr), add to Cloudflare, run setup-stable-tunnel.ps1
+  Cost:    ~$10/year domain + free Cloudflare
+  Pros:    HTTPS, your PC hosts, professional URL
+  Cons:    PC must stay on; need domain (NOT duckdns.org)
+
+OPTION 3 — DUCKDNS (fluxgrid.duckdns.org)
+  URL:     http://fluxgrid.duckdns.org  (permanent — does NOT change)
+  Setup:   ISP must open port 80 (you were blocked)
+  Cost:    Free
+  Pros:    Name you already have; stable for affiliates once it works
+  Cons:    HTTP only (no https unless extra setup); needs ISP port forward
+
+DUCKDNS + CLOUDFLARE TUNNEL = DOES NOT WORK
+  DuckDNS only points to your home IP address.
+  Cloudflare Tunnel needs DNS on Cloudflare. They are incompatible.
+
+FOR AFFILIATES TODAY:
+  Best path: Deploy to Render (Option 1) → give affiliates one link that never changes.

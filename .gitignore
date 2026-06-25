@@ -1,0 +1,9 @@
+node_modules/
+server/.env
+server/data/*.json
+client/dist/
+deploy/tunnel-err.log
+deploy/tunnel-out.log
+*.log
+.DS_Store
+.env

@@ -1,0 +1,57 @@
+FLUXGRID → RENDER (only 4 steps YOU must do)
+=============================================
+
+Everything else is ready in the project. Your permanent link will be:
+
+  https://fluxgrid.onrender.com
+
+────────────────────────────────────────────
+STEP 1 — GitHub (5 min)
+────────────────────────────────────────────
+1. Go to https://github.com and sign in (or create account).
+2. Click "+" → "New repository".
+3. Name: fluxgrid
+4. Leave it EMPTY (no README, no .gitignore).
+5. Click Create repository.
+6. Copy the repo URL shown (like https://github.com/YOURNAME/fluxgrid.git)
+
+────────────────────────────────────────────
+STEP 2 — Push code from your PC (2 min)
+────────────────────────────────────────────
+Open PowerShell and run (replace YOURNAME):
+
+  cd C:\Users\julia\voidlink
+  git remote add origin https://github.com/YOURNAME/fluxgrid.git
+  git branch -M main
+  git push -u origin main
+
+GitHub will ask you to log in — use browser login.
+
+────────────────────────────────────────────
+STEP 3 — Render (5 min)
+────────────────────────────────────────────
+1. Go to https://render.com → Sign up with GitHub.
+2. Dashboard → "New +" → "Blueprint".
+3. Connect your fluxgrid repo → click Apply.
+4. When it asks for environment variables, set ONE secret:
+
+   ADMIN_PIN = (open C:\Users\julia\voidlink\server\.env and copy the ADMIN_PIN line value)
+
+   BITCOIN_TIP_ADDRESS is already set in render.yaml.
+
+5. Click "Apply" / "Deploy" and wait ~8 minutes.
+
+────────────────────────────────────────────
+STEP 4 — Test
+────────────────────────────────────────────
+Open: https://fluxgrid.onrender.com
+
+Admin: https://fluxgrid.onrender.com/admin
+(use same ADMIN_PIN you set in Step 3)
+
+────────────────────────────────────────────
+AFFILIATE LINK (never changes):
+  https://fluxgrid.onrender.com
+
+Free tier sleeps after 15 min idle — first visit may take 30 sec to wake.
+Upgrade to Starter ($7/mo) in Render for always-on.

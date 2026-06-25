@@ -1,0 +1,58 @@
+.void-bg {
+  position: fixed;
+  inset: 0;
+  background: var(--gradient-void);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.void-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+}
+
+.void-bg__particles {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 25%, var(--neon-cyan) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 15%, var(--neon-magenta) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 80%, var(--neon-violet) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 60%, var(--neon-cyan) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 70%, var(--neon-magenta) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 35%, var(--neon-lime) 0%, transparent 100%);
+  background-size: 100% 100%;
+  opacity: 0.2;
+  animation: particle-drift 80s linear infinite;
+}
+
+.void-bg__scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 240, 255, 0.02) 2px,
+    rgba(0, 240, 255, 0.02) 4px
+  );
+  animation: scanline-sweep 8s linear infinite;
+}
+
+@keyframes particle-drift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-2%, 1%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes scanline-sweep {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}

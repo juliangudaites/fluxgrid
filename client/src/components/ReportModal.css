@@ -1,0 +1,116 @@
+.report-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(5, 5, 8, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.report-modal {
+  width: min(480px, 100%);
+  background: var(--void-800);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  animation: signal-in 0.3s var(--ease-out-expo);
+}
+
+.report-modal__title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--danger);
+  margin-bottom: var(--space-3);
+}
+
+.report-modal__channel {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  margin-bottom: var(--space-2);
+}
+
+.report-modal__preview {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.3);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+  line-height: 1.4;
+}
+
+.report-modal__categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.report-modal__cat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  border: 1px solid var(--void-600);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.report-modal__cat input {
+  accent-color: var(--neon-cyan);
+}
+
+.report-modal__cat--active {
+  border-color: var(--danger);
+  background: rgba(255, 51, 102, 0.08);
+  color: var(--text-primary);
+}
+
+.report-modal__note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: var(--space-4);
+}
+
+.report-modal__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.report-modal__cancel,
+.report-modal__submit {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.report-modal__cancel {
+  border: 1px solid var(--void-600);
+  color: var(--text-muted);
+}
+
+.report-modal__submit {
+  background: var(--danger);
+  color: white;
+}
+
+.report-modal__submit:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+}
+
+.report-modal__submit:disabled {
+  opacity: 0.6;
+}

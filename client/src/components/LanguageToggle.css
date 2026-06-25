@@ -1,0 +1,18 @@
+.lang-toggle {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: var(--neon-violet);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.lang-toggle:hover {
+  background: rgba(139, 92, 246, 0.12);
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.35);
+}
