@@ -31,7 +31,33 @@ import { LanguageToggle } from './components/LanguageToggle';
 import { ReportModal } from './components/ReportModal';
 import { captureEndorselyViaFromUrl } from './utils/endorsely';
 import { captureRefFromUrl } from './utils/refCapture';
+import { useSeo } from './seo/useSeo';
+import { SITE } from './seo/site';
+import { SeoHomeSection } from './seo/SeoHomeSection';
 import './App.css';
+
+const HOME_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: 'FLUXGRID',
+      url: SITE.url,
+      applicationCategory: 'CommunicationApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description: SITE.defaultDescription,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: 'What is FLUXGRID?', acceptedAnswer: { '@type': 'Answer', text: 'Anonymous channel-based chat in the browser. No login required.' } },
+        { '@type': 'Question', name: 'Is FLUXGRID free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. VOID tier is free with unlimited public messages.' } },
+        { '@type': 'Question', name: 'How do I join a channel?', acceptedAnswer: { '@type': 'Answer', text: 'Enter a shared channel code or look up an ID from the feed.' } },
+      ],
+    },
+  ],
+};
 
 const FEED_POLL_MS = 2200;
 const FEED_POLL_HIDDEN_MS = 7500;
@@ -42,6 +68,12 @@ const THREAD_POLL_MS = 9000;
 const MAX_VISIBLE = 80;
 
 function AppContent() {
+  useSeo({
+    title: SITE.defaultTitle,
+    description: SITE.defaultDescription,
+    path: '/',
+    jsonLd: HOME_JSON_LD,
+  });
   const { t } = useI18n();
   const {
     caps,
@@ -500,6 +532,7 @@ function AppContent() {
           </section>
         )}
 
+        <SeoHomeSection />
         <LegalFooter onOpenLegal={setLegalDoc} />
       </main>
 

@@ -1,0 +1,135 @@
+FLUXGRID AFFILIATE PROGRAM — TERMS & CONDITIONS
+===============================================
+Effective: 2026 · Program operated by FLUXGRID
+
+By joining or promoting FLUXGRID as an affiliate, you agree to these terms.
+
+────────────────────────────────────────────
+1. PROGRAM OVERVIEW
+────────────────────────────────────────────
+FLUXGRID is an anonymous communication platform for adults (18+).
+Affiliates earn commission when referred users purchase paid tiers
+(SIGNAL, PULSE, or FLUX) through tracked card/Stripe checkout.
+
+Official site: https://fluxgrid.onrender.com
+
+────────────────────────────────────────────
+2. ELIGIBILITY
+────────────────────────────────────────────
+• You must be 18 years or older.
+• You may not promote FLUXGRID to minors or on channels aimed at minors.
+• You may not join if you are in a jurisdiction where promoting this
+  type of service is illegal.
+• FLUXGRID may reject or remove any affiliate at any time, for any reason.
+
+────────────────────────────────────────────
+3. COMMISSION
+────────────────────────────────────────────
+• Standard commission: 30% of each qualifying paid tier sale.
+• Qualifying sales: SIGNAL ($6), PULSE ($11), FLUX ($18) per 30-day access key.
+• Card/Stripe sales: tracked automatically via Endorsely.
+• Bitcoin tier sales: not auto-tracked unless otherwise agreed in writing.
+  Manual attribution may apply only when a unique ?ref= or ?via= link was
+  used and sale is verifiable.
+• Commission applies to the net sale amount received by FLUXGRID.
+• Chargebacks, refunds, or fraudulent payments void commission on that sale.
+• Commission structure may change with 14 days notice in the affiliate portal.
+
+────────────────────────────────────────────
+4. ATTRIBUTION & COOKIES
+────────────────────────────────────────────
+• Affiliate links use Endorsely tracking (?via=yourname).
+• Last-click attribution unless otherwise stated in your Endorsely dashboard.
+• Cookie duration is set in the affiliate platform (default 60–90 days).
+• Self-referrals are not allowed and will not be paid.
+• Cookie stuffing, click fraud, and fake traffic are prohibited.
+
+────────────────────────────────────────────
+5. PAYOUTS
+────────────────────────────────────────────
+• Payouts are processed through Endorsely per their schedule and method
+  (e.g. PayPal), once you reach the minimum payout threshold.
+• You are responsible for any taxes on your affiliate income.
+• FLUXGRID does not withhold taxes unless required by law.
+
+────────────────────────────────────────────
+6. APPROVED MESSAGING (WHAT YOU CAN SAY)
+────────────────────────────────────────────
+You may describe FLUXGRID as:
+• Anonymous channel-based communication — no login, no account
+• Shared channel codes open private conversations
+• Messages can vanish past the "void line"
+• Paid tiers unlock vanity IDs, attachments, deep void features
+• Card or Bitcoin payment for tiers; no FLUXGRID account required
+• 18+ adults only
+
+────────────────────────────────────────────
+7. PROHIBITED CONDUCT (STRICT)
+────────────────────────────────────────────
+You must NOT:
+• Target, appeal to, or involve minors in any way
+• Promote illegal activity, CSAM, exploitation, harassment, or violence
+• Claim FLUXGRID is "100% untraceable," "impossible to monitor," or
+  "legal for any purpose" — it is a privacy tool, not immunity from law
+• Guarantee anonymity, security, or that messages cannot be reported
+• Bid on FLUXGRID brand keywords (e.g. "FLUXGRID" in paid ads) unless
+  explicitly approved in writing
+• Use spam, unsolicited bulk email, malware, pop-ups, or deceptive redirects
+• Misrepresent pricing, features, or refund policy
+• Create fake reviews, testimonials, or conversion events
+• Impersonate FLUXGRID staff or official support
+• Use FLUXGRID branding to promote unrelated products or scams
+
+────────────────────────────────────────────
+8. BRAND & CREATIVE ASSETS
+────────────────────────────────────────────
+• Use only official links provided in your affiliate dashboard.
+• You may use FLUXGRID name and approved promo materials we provide.
+• Do not modify the logo in a misleading way or imply endorsement of
+  third-party products.
+• Paid ad creatives must be truthful and include 18+ where required by law.
+
+────────────────────────────────────────────
+9. CONTENT STANDARDS
+────────────────────────────────────────────
+FLUXGRID has zero tolerance for child exploitation. Any affiliate found
+promoting FLUXGRID alongside CSAM, grooming, or minor-related abuse will
+be terminated immediately and may be reported to authorities.
+
+────────────────────────────────────────────
+10. TERMINATION
+────────────────────────────────────────────
+FLUXGRID may suspend or terminate your affiliate account immediately if you:
+• Break these terms
+• Generate fraudulent or low-quality traffic
+• Damage brand reputation
+• Violate applicable law
+
+Unpaid commissions on fraudulent or refunded sales are forfeited.
+
+────────────────────────────────────────────
+11. LIMITATION OF LIABILITY
+────────────────────────────────────────────
+FLUXGRID is provided "as is." We are not liable for indirect damages,
+lost profits, or service interruptions. Maximum liability to any
+affiliate is limited to unpaid commissions earned in good faith.
+
+────────────────────────────────────────────
+12. CHANGES
+────────────────────────────────────────────
+We may update these terms at any time. Continued promotion after notice
+means you accept the updated terms.
+
+────────────────────────────────────────────
+13. CONTACT
+────────────────────────────────────────────
+Affiliate support: via your Endorsely dashboard or site contact channel.
+
+────────────────────────────────────────────
+QUICK SUMMARY FOR AFFILIATES
+────────────────────────────────────────────
+✓ 30% commission on card tier sales
+✓ 18+ audiences only
+✓ Use your official ?via= link
+✓ Be honest — privacy tool, not "invisible to law enforcement"
+✗ No spam, no brand bidding, no minors, no illegal promotion

@@ -1,0 +1,87 @@
+.fg-seo-page {
+  min-height: 100vh;
+  background: var(--void-950);
+  color: var(--text-primary);
+  padding: var(--space-4) var(--space-6) var(--space-8);
+}
+
+.fg-seo-page__header {
+  margin-bottom: var(--space-6);
+}
+
+.fg-seo-page__brand {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--neon-cyan);
+  text-decoration: none;
+}
+
+.fg-seo-article {
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+.fg-seo-article h1 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--neon-cyan);
+  margin-bottom: var(--space-4);
+}
+
+.fg-seo-article h2 {
+  font-size: 0.95rem;
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.fg-seo-article p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.fg-seo-faq__item h3 {
+  font-size: 0.85rem;
+  color: var(--neon-cyan);
+  margin-top: var(--space-3);
+}
+
+.fg-seo-related {
+  list-style: none;
+  margin-top: var(--space-2);
+}
+
+.fg-seo-related a {
+  color: var(--neon-cyan);
+  line-height: 1.8;
+}
+
+.fg-seo-sister a {
+  color: var(--neon-magenta);
+}
+
+.fg-seo-home {
+  max-width: 640px;
+  margin: var(--space-6) auto;
+  padding: 0 var(--space-6);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.fg-seo-home summary {
+  cursor: pointer;
+  min-height: 44px;
+  color: var(--text-secondary);
+}
+
+.fg-seo-home ul {
+  list-style: none;
+  margin: var(--space-3) 0;
+}
+
+.fg-seo-home a {
+  color: var(--neon-cyan);
+  line-height: 1.8;
+}

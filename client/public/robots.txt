@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /learn/
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://fluxgrid.onrender.com/sitemap.xml

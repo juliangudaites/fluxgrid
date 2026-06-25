@@ -1,0 +1,20 @@
+FLUXGRID — Analytics & SEO setup
+=================================
+
+See deadlink/deploy/ANALYTICS-SEO-SETUP.txt for shared Plausible + GA4 steps.
+
+FLUXGRID Render env:
+  VITE_PLAUSIBLE_DOMAIN=fluxgrid.onrender.com
+  VITE_PUBLIC_SITE_URL=https://fluxgrid.onrender.com
+  VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX  (optional)
+
+Sitemap: https://fluxgrid.onrender.com/sitemap.xml
+
+SEO PAGES LIVE
+--------------
+/learn/anonymous-chat-no-login
+/learn/anonymous-messaging-app
+/learn/private-channel-codes
+/learn/vs-telegram-groups
+/learn/secure-anonymous-communication
+/learn/security

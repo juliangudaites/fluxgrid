@@ -26,3 +26,9 @@ services:
         sync: false
       - key: PUBLIC_APP_URL
         value: https://fluxgrid.onrender.com
+      - key: VITE_PUBLIC_SITE_URL
+        value: https://fluxgrid.onrender.com
+      - key: VITE_PLAUSIBLE_DOMAIN
+        sync: false
+      - key: VITE_GA4_MEASUREMENT_ID
+        value: G-6RVP3T8ET3
